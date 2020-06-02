@@ -1,0 +1,74 @@
+{
+  "ReRoutes": [
+    // Authentication
+    {
+      "DownstreamPathTemplate": "/api/logins/",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5000 // change it to port of AuthAPI
+        }
+      ],
+      "UpstreamPathTemplate": "/api/logins/",
+      "UpstreamHttpMethod": [ "Get", "POST", "PUT", "DELETE" ]
+    },
+    // Client Service Route
+    {
+      "DownstreamPathTemplate": "/api/Client/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5001 // change it to port of ClientAPI
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Client/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "PUT", "DELETE" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
+    },
+    // Professionnel Service Route
+    {
+      "DownstreamPathTemplate": "/api/professionnel/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5912 // change it to port of ProfessionnelAPI
+        }
+      ],
+      "UpstreamPathTemplate": "/api/professionnel/{everything}",
+      "UpstreamHttpMethod": [ "Get", "POST", "PUT", "DELETE" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
+
+    },
+    // Admin Service Route
+    {
+      "DownstreamPathTemplate": "/api/Admin/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5010 // change it to port of ClientAPI
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Admin/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "PUT", "DELETE" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
+    }
+
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:7000"
+  }
+
+}
